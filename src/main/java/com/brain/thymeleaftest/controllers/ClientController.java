@@ -32,7 +32,7 @@ public class ClientController {
 
     @GetMapping("/new")
     public String showSignUpForm( Model model) {
-        model.addAttribute("clientAdd", new Client());
+        model.addAttribute("client", new Client());
         return "add-client";
     }
 
@@ -40,7 +40,7 @@ public class ClientController {
     public String addClient(@Valid Client client,
                             BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("clientAdd", client);
+            model.addAttribute("client", client);
             return "add-client";
         }
         clientRepository.save(client);
@@ -75,5 +75,14 @@ public class ClientController {
         clientRepository.deleteById(id);
         model.addAttribute("clients", clientRepository.findAll());
         return "index";
+    }
+
+    @GetMapping("/page1")
+    public String page1( Model model) {
+        return "page1";
+    }
+    @GetMapping("/page2")
+    public String page2( Model model) {
+        return "page2";
     }
 }
